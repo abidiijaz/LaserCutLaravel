@@ -1,0 +1,25 @@
+.details-filter-row label{
+    width: auto !important;
+}
+.ab_custom_field {
+    display: inline-block;
+    padding: 10px;
+    border: solid 2px #dadada;
+}
+input[type="radio"] {
+    display: none;
+}
+input[type="radio"]:checked + .ab_custom_field {
+    border: solid 2px black;
+}
+.ab_custom_field_f_length {
+    display: inline-block;
+    padding: 10px;
+    border: solid 2px #dadada;
+}
+input[type="radio"] {
+    display: none;
+}
+input[type="radio"]:checked + .ab_custom_field_f_length {
+    border: solid 2px black;
+}
