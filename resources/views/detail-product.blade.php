@@ -32,29 +32,25 @@
                                 <div class="product-gallery product-gallery-vertical">
                                     <div class="row">
                                         <figure class="product-main-image">
-                                            <img id="product-zoom" src="user-end/images/pppp_low.png" data-zoom-image="user-end/assets/images/products/single/1-big.jpg" alt="product image">
-
+                                            <?php $cus_image = json_decode($product->image);?>
+                                            <img id="product-zoom" src="{{ asset('ab_admin/product/sm-'.$cus_image[0]) }}" data-zoom-image="{{ asset('ab_admin/product/'.$cus_image[0]) }}" alt="{{$product->title}}">
                                             <a href="#" id="btn-product-gallery" class="btn-product-gallery">
                                                 <i class="icon-arrows"></i>
                                             </a>
                                         </figure><!-- End .product-main-image -->
 
                                         <div id="product-zoom-gallery" class="product-image-gallery">
-                                            <a class="product-gallery-item active" href="#" data-image="user-end/images/pppp_low.png" data-zoom-image="user-end/images/pppp_low.png">
-                                                <img src="user-end/images/pppp_low.png" alt="product side">
-                                            </a>
-
-                                            <a class="product-gallery-item" href="#" data-image="user-end/images/pppp_low.png" data-zoom-image="user-end/images/pppp_low.png">
-                                                <img src="user-end/images/pppp_low.png" alt="product cross">
-                                            </a>
-
-                                            <a class="product-gallery-item" href="#" data-image="user-end/images/pppp_low.png" data-zoom-image="user-end/images/pppp_low.png">
-                                                <img src="user-end/images/pppp_low.png" alt="product with model">
-                                            </a>
-
-                                            <a class="product-gallery-item" href="#" data-image="user-end/images/pppp_low.png" data-zoom-image="user-end/images/pppp_low.png">
-                                                <img src="user-end/images/pppp_low.png" alt="product back">
-                                            </a>
+                                            @foreach ($cus_image as $key=>$image)
+                                            @if($key === 0)
+                                                <a class="product-gallery-item active" href="#" data-image="{{ asset('ab_admin/product/sm-'.$image) }}" data-zoom-image="{{ asset('ab_admin/product/'.$image) }}">
+                                                    <img src="{{ asset('ab_admin/product/'.$image) }}" alt="product side">
+                                                </a>
+                                            @else
+                                                <a class="product-gallery-item" href="#" data-image="{{ asset('ab_admin/product/sm-'.$image) }}" data-zoom-image="{{ asset('ab_admin/product/'.$image) }}">
+                                                    <img src="{{ asset('ab_admin/product/'.$image) }}" alt="product side">
+                                                </a>
+                                            @endif
+                                            @endforeach
                                         </div><!-- End .product-image-gallery -->
                                     </div><!-- End .row -->
                                 </div><!-- End .product-gallery -->
@@ -63,11 +59,6 @@
                             <div class="col-md-6">
                                 <div class="product-details">
                                     <h1 class="product-title">{{$product->title}}</h1><!-- End .product-title -->
-                                    <div class="details-filter-row details-row-size">
-                                        <label for="qty">Category: {{ $product->category_id }}</label>
-
-                                    </div><!-- End .details-filter-row -->
-
                                     <div class="ratings-container">
                                         <div class="ratings">
                                             <div class="ratings-val" style="width: 80%;"></div>
@@ -77,8 +68,8 @@
                                         <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
                                     </div>
                                     <!-- End .rating-container -->
-                                    <label for="size"><h6>Barifly Description</h6> </label><br/>
-                                    <div class="product-content">{{ $product->description }}</div><!-- End .product-content -->
+                                    <label for="size"><h6>Product Information</h6> </label><br/>
+                                    <div class="product-content">{!! $product->description !!}</div><!-- End .product-content -->
                                     @include('detailcheckcondition')
                                     <div class="details-filter-row details-row-size">
                                         <label for="qty">Qty:</label>
@@ -88,9 +79,9 @@
                                     </div><!-- End .details-filter-row -->
                                     <div class="product-price">${{ $product->price }}</div><!-- End .product-price -->
                                     <div class="product-details-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <a href="#" onclick="AddToCart({{ $product->id }})" class="btn-product btn-cart"><span>add to cart</span></a>
 
-                                       
+
                                     </div><!-- End .product-details-action -->
 
                                     <div class="product-details-footer">
@@ -230,9 +221,9 @@
 
                     <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
 
-                    <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" 
+                    <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
                         data-owl-options='{
-                            "nav": false, 
+                            "nav": false,
                             "dots": true,
                             "margin": 20,
                             "loop": false,

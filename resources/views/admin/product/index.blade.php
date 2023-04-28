@@ -53,7 +53,6 @@
                                                 <th>Price</th>
                                                 <th>Category</th>
                                                 <th>Sale</th>
-                                                <th>Description</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -66,7 +65,9 @@
                                                     @if($product->image == '')
                                                     Image Not Found!
                                                     @else
-                                                    <img src="{{ asset('ab_admin/product/'.$product->image) }}" width="80" style="border: 1px solid lightgray; padding:5px;" alt="Avatar">
+                                                    
+                                                    <?php $cus_image = json_decode($product->image); ?>
+                                                    <img src="{{ asset('ab_admin/product/'.$cus_image[0]) }}" width="80" style="border: 1px solid lightgray; padding:5px;" alt="Avatar">
                                                     @endif
                                                 </td>
                                                 <td>{{ $product->price }}</td>
@@ -78,7 +79,7 @@
                                                         @endif
                                                 </td>
                                                 <td>{{ $product->sale }}</td>
-                                                <td class="text-capitalize">{{ $product->description }}</td>
+                                               
                                                 <td>
                                                     <label class="custom-switch m-0">
                                                         <input type="checkbox" value="0" {{($product->status == 1?'checked':'')}} class="custom-switch-input admin-change-status-user" data-id="" data-toggle="toggle" data-onstyle="outline-success" >
@@ -107,7 +108,7 @@
                                                 <th>Price</th>
                                                 <th>Category</th>
                                                 <th>Sale</th>
-                                                <th>Description</th>
+                                                
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -158,7 +159,7 @@
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Image</label>
-                                                    <input type="file" name="image" class="form-control" placeholder="image">
+                                                    <input type="file" name="image[]" class="form-control" multiple>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">

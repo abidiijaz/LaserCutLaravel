@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}" />
     <title>Laser Cut</title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="eCommerce ">
@@ -30,7 +31,11 @@
     <link rel="stylesheet" href="{{asset('user-end/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('user-end/assets/css/skins/skin-demo-4.css')}}">
     <link rel="stylesheet" href="{{asset('user-end/assets/css/demos/demo-4.css')}}">
+    <link rel="stylesheet" href="{{asset('user-end/assets/css/plugins/nouislider/nouislider.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <script>
+        var public_path = "{{ asset('/ab_admin/product') }}";
+    </script>
 </head>
 
 <body>
@@ -128,17 +133,17 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <!--/panel-group-->
                         </div>
-                       
+
                     </div><!-- End .row -->
                 </div><!-- End .cat-blocks-container -->
             </div><!-- End .container -->
 
-          
-          
+
+
             <div class="mb-4"></div><!-- End .mb-4 -->
 
             <div class="container">
@@ -203,7 +208,7 @@
             </div><!-- End .icon-boxes-container -->
         </main><!-- End .main -->
         @include('layouts.user.footer')
-      
+
     <!-- Plugins JS File -->
     <script src="{{asset('user-end/assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('user-end/assets/js/bootstrap.bundle.min.js')}}"></script>
@@ -215,9 +220,11 @@
     <script src="{{asset('user-end/assets/js/jquery.plugin.min.js')}}"></script>
     <script src="{{asset('user-end/assets/js/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{asset('user-end/assets/js/jquery.countdown.min.js')}}"></script>
+    <script src="{{asset('user-end/assets/js/jquery.elevateZoom.min.js')}}"></script>
     <!-- Main JS File -->
     <script src="{{asset('user-end/assets/js/main.js')}}"></script>
     <script src="{{asset('user-end/assets/js/demos/demo-4.js')}}"></script>
+    <script src="{{asset('user-end/assets/js/custom-js.js')}}"></script>
 <script type="text/javascript">
     $("document").ready(function(){
         $(".menu li").hover(function() {

@@ -16,18 +16,24 @@ class ProductController extends Controller
         return view('admin.product.index',compact('categories','products'));
     }
     public function AddProduct(Request $request){
-        // dd($request->all());
+        // dd($request->file('image')[0]);
+        $image_array = array();
         $product = new Product();
         $product->title = $request->name;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
         $product->description = $request->description;
-        if($request->hasFile('image')){
-            $avatar = $request->file('image');
-            $filename = time().'.'.$avatar->getClientOriginalExtension();
-            Image::make($avatar)->resize(300,300)->save(public_path('/ab_admin/product/'.$filename));
-            $product->image = $filename;
+        for($i=0; $i<count($request->image); $i++){
+            if($request->hasFile('image')){
+                $avatar = $request->file('image')[$i];
+                $filename =rand().time().'.'.$avatar->getClientOriginalExtension();
+                $sm_filename ='sm-'.$filename;
+                Image::make($avatar)->resize(1200,1200)->save(public_path('/ab_admin/product/'.$filename));
+                Image::make($avatar)->resize(300,300)->save(public_path('/ab_admin/product/'.$sm_filename));
+                $image_array[$i] = $filename;
+            }
         }
+        $product->image = json_encode($image_array);
         if($request->status == 'on'){
             $product->status = 1;
         }

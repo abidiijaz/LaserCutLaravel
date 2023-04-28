@@ -53,7 +53,7 @@
                         </button>
 
                         <a href="/" class="logo">
-                            <img src="user-end/images/logo.avif" alt="Logo" width="225" height="25">
+                            <img src="{{ asset('user-end/images/logo.avif') }}" alt="Logo" width="225" height="25">
                         </a>
                     </div><!-- End .header-left -->
 
@@ -118,58 +118,44 @@
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <div class="icon">
                                     <i class="icon-shopping-cart"></i>
-                                    <span class="cart-count">2</span>
+                                    <span class="cart-count">@if(session('cart')){{ count(session('cart')) }}@else 0 @endif</span>
                                 </div>
                                 <p>Cart</p>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" style="width: 280px;">
                                 <div class="dropdown-cart-products">
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Beige knitted elastic runner shoes</a>
-                                            </h4>
+                                    <?php $total = 0; ?>
+                                    @if(session('cart'))
+                                        @foreach (session('cart') as $id=>$details)
+                                            <?php $total += $details['price']*$details['quantity']; ?>
+                                            <div class="product">
+                                                <div class="product-cart-details">
+                                                    <h4 class="product-title">
+                                                        <a href="{{ url('detail-product/'.$id) }}">{{ $details['name'] }}</a>
+                                                    </h4>
 
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $84.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
+                                                    <span class="cart-product-info">
+                                                        <span class="cart-product-qty">{{ $details['quantity'] }}</span>
+                                                        x ${{ $details['price'] }}
+                                                    </span>
+                                                </div><!-- End .product-cart-details -->
 
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="user-end/assets/images/products/cart/product-1.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Blue utility pinafore denim dress</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $76.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="user-end/assets/images/products/cart/product-2.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
+                                                <figure class="product-image-container">
+                                                    <a href="product.html" class="product-image">
+                                                        <img src="{{ asset('ab_admin/product/'.$details['image']) }}" alt="product">
+                                                    </a>
+                                                </figure>
+                                                <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                            </div><!-- End .product -->
+                                        @endforeach
+                                    @endif
                                 </div><!-- End .cart-product -->
 
                                 <div class="dropdown-cart-total">
                                     <span>Total</span>
 
-                                    <span class="cart-total-price">$160.00</span>
+                                    <span class="cart-total-price">${{ $total }}</span>
                                 </div><!-- End .dropdown-cart-total -->
 
                                 <div class="dropdown-cart-action">
@@ -200,7 +186,7 @@
                                                         <div class="megamenu inner-div-megamenu1">
                                                         <div class="menu-col" >
                                                             <div class="demo-list">
-                                                            
+
 
                                                                 <div class="demo-item" style="flex: 0 0 33%; max-width:33%; text-align:left;">
                                                                     <a href="#">
@@ -280,13 +266,13 @@
                                                                     <p class="d-flex"><span style="margin-left:15px; line-height:3;">Cutting Material Package</span></p>
                                                                     <p class="d-flex"><span style="margin-left:15px; line-height:3;">Wood</span></p>
                                                                     <p class="d-flex"><span style="margin-left:15px; line-height:3;">Acrylic</span></p>
-                                                                    
+
                                                                 </div><!-- End .demo-item -->
-                                                                
+
                                                                 <div class="demo-item" style="flex: 0 0 33%; max-width:33%; text-align:left;">
                                                                     <h6>Materials</h6>
                                                                     <p class="d-flex"><img src="{{ asset('assets/menu_images/Laser-Cutting-Files-1.jpg') }}" width="45"> <span style="margin-left:15px; line-height:3;">Cloudray Decoration Pattern Cutting Files AI/DWG/DXF</span></p>
-                                                            
+
                                                                 </div><!-- End .demo-item -->
                                                                 </div><!-- End .demo-list -->
                                                             </div><!-- End .menu-col -->

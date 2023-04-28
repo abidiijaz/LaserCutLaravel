@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <link rel="icon" href="" type="image/x-icon"/>
-
+<meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}" />
 <title>LaserCut::@yield('mytitle')</title>
 
 <!-- Bootstrap Core and vandor -->

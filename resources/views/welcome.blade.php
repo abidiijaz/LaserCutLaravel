@@ -1,69 +1,6 @@
 @extends('layouts.user.mainapp')
 @section('content')
-<div class="intro-slider-container mb-5">
-                <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl" 
-                    data-owl-options='{
-                        "dots": true,
-                        "nav": true, 
-                        "autoplay":true,
-                        "autoplayTimeout":"3000",
-                        "responsive": {
-                            "1200": {
-                                "nav": true,
-                                "dots": true
-                            }
-                        }
-                    }'>
-                    <div class="intro-slide" style="background-image: url(user-end/images/slide-1.png);">
-                        <div class="container intro-content">
-                            <div class="row justify-content-end">
-                                <div class="col-auto col-sm-7 col-md-6 col-lg-5">
-                                    <h3 class="intro-subtitle text-third">Deals and Promotions</h3><!-- End .h3 intro-subtitle -->
-                                    <h1 class="intro-title">Beats by</h1>
-                                    <h1 class="intro-title">Dre Studio 3</h1><!-- End .intro-title -->
 
-                                    <div class="intro-price">
-                                        <sup class="intro-old-price">$349,95</sup>
-                                        <span class="text-third">
-                                            $279<sup>.99</sup>
-                                        </span>
-                                    </div><!-- End .intro-price -->
-
-                                    <a href="category.html" class="btn btn-primary btn-round">
-                                        <span>Shop More</span>
-                                        <i class="icon-long-arrow-right"></i>
-                                    </a>
-                                </div><!-- End .col-lg-11 offset-lg-1 -->
-                            </div><!-- End .row -->
-                        </div><!-- End .intro-content -->
-                    </div><!-- End .intro-slide -->
-
-                    <div class="intro-slide" style="background-image: url(assets/user-end/images/demos/demo-4/slider/slide-2.png);">
-                        <div class="container intro-content">
-                            <div class="row justify-content-end">
-                                <div class="col-auto col-sm-7 col-md-6 col-lg-5">
-                                    <h3 class="intro-subtitle text-primary">New Arrival</h3><!-- End .h3 intro-subtitle -->
-                                    <h1 class="intro-title">Apple iPad Pro <br>12.9 Inch, 64GB </h1><!-- End .intro-title -->
-
-                                    <div class="intro-price">
-                                        <sup>Today:</sup>
-                                        <span class="text-primary">
-                                            $999<sup>.99</sup>
-                                        </span>
-                                    </div><!-- End .intro-price -->
-
-                                    <a href="category.html" class="btn btn-primary btn-round">
-                                        <span>Shop More</span>
-                                        <i class="icon-long-arrow-right"></i>
-                                    </a>
-                                </div><!-- End .col-md-6 offset-md-6 -->
-                            </div><!-- End .row -->
-                        </div><!-- End .intro-content -->
-                    </div><!-- End .intro-slide -->
-                </div><!-- End .intro-slider owl-carousel owl-simple -->
-
-                <span class="slider-loader"></span><!-- End .slider-loader -->
-            </div><!-- End .intro-slider-container -->
 <div class="container">
     <div class="tab-content">
         <div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel" aria-labelledby="top-all-link">
@@ -74,7 +11,8 @@
                             <div class="product product-11 text-center">
                                 <figure class="product-media">
                                     <a href="/detail-product/{{ $product->id }}">
-                                        <img src="{{ asset('ab_admin/product/'.$product->image) }}" alt="Product image" class="product-image">
+                                        <?php $cus_image = json_decode($product->image); ?>
+                                        <img src="{{ asset('ab_admin/product/'.$cus_image[0]) }}" alt="{{$product->title}}" class="product-image">
                                         {{-- <img src="assets/images/demos/demo-2/products/product-7-2.jpg" alt="Product image" class="product-image-hover"> --}}
                                     </a>
 
@@ -93,16 +31,16 @@
                                     </div><!-- End .product-price -->
                                 </div><!-- End .product-body -->
                                 <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                    <a href="#" onclick="AddToCart({{ $product->id }})" class="btn-product btn-cart"><span>add to cart</span></a>
                                 </div><!-- End .product-action -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
                     @endforeach
-                   
+
                 </div><!-- End .row -->
             </div><!-- End .products -->
         </div><!-- .End .tab-pane -->
-       
+
     </div><!-- End .tab-content -->
 </div>
             <div class="container">
@@ -222,13 +160,13 @@
                                    <!--  <div class="ratings-container">
                                         <div class="ratings">
                                             <div class="ratings-val" style="width: 40%;"></div>
-                                            
+
                                         </div>
                                         <span class="ratings-text">( 4 Reviews )</span>
                                     </div> -->
-                                   
 
-                                    
+
+
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
@@ -264,13 +202,13 @@
                                    <!--  <div class="ratings-container">
                                         <div class="ratings">
                                             <div class="ratings-val" style="width: 40%;"></div>
-                                            
+
                                         </div>
                                         <span class="ratings-text">( 4 Reviews )</span>
                                     </div> -->
-                                   
 
-                                    
+
+
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
@@ -306,13 +244,13 @@
                                    <!--  <div class="ratings-container">
                                         <div class="ratings">
                                             <div class="ratings-val" style="width: 40%;"></div>
-                                            
+
                                         </div>
                                         <span class="ratings-text">( 4 Reviews )</span>
                                     </div> -->
-                                   
 
-                                    
+
+
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
@@ -348,18 +286,18 @@
                                    <!--  <div class="ratings-container">
                                         <div class="ratings">
                                             <div class="ratings-val" style="width: 40%;"></div>
-                                            
+
                                         </div>
                                         <span class="ratings-text">( 4 Reviews )</span>
                                     </div> -->
-                                   
 
-                                    
+
+
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-                       
-                       
+
+
                     </div><!-- End .row -->
                 </div><!-- End .products -->
 
@@ -411,13 +349,13 @@
                                    <!--  <div class="ratings-container">
                                         <div class="ratings">
                                             <div class="ratings-val" style="width: 40%;"></div>
-                                            
+
                                         </div>
                                         <span class="ratings-text">( 4 Reviews )</span>
                                     </div> -->
-                                   
 
-                                    
+
+
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
@@ -453,13 +391,13 @@
                                    <!--  <div class="ratings-container">
                                         <div class="ratings">
                                             <div class="ratings-val" style="width: 40%;"></div>
-                                            
+
                                         </div>
                                         <span class="ratings-text">( 4 Reviews )</span>
                                     </div> -->
-                                   
 
-                                    
+
+
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
@@ -495,13 +433,13 @@
                                    <!--  <div class="ratings-container">
                                         <div class="ratings">
                                             <div class="ratings-val" style="width: 40%;"></div>
-                                            
+
                                         </div>
                                         <span class="ratings-text">( 4 Reviews )</span>
                                     </div> -->
-                                   
 
-                                    
+
+
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
@@ -537,18 +475,18 @@
                                    <!--  <div class="ratings-container">
                                         <div class="ratings">
                                             <div class="ratings-val" style="width: 40%;"></div>
-                                            
+
                                         </div>
                                         <span class="ratings-text">( 4 Reviews )</span>
                                     </div> -->
-                                   
 
-                                    
+
+
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-                       
-                       
+
+
                     </div><!-- End .row -->
                 </div><!-- End .products -->
 
@@ -562,12 +500,12 @@
                 <div class="cat-blocks-container">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-lg-12">
-                            <img src="user-end/images/banner-co2.jpg" class="mt-4" alt="Category image">       
+                            <img src="user-end/images/banner-co2.jpg" class="mt-4" alt="Category image">
                         </div><!-- End .col-sm-4 col-lg-2 -->
                     </div><!-- End .row -->
                 </div><!-- End .cat-blocks-container -->
             </div><!-- End .container -->
-            
+
             <div class="mb-3"></div><!-- End .mb-5 -->
             <div class="container new-arrivals">
                 <div class="heading heading-flex mb-3">
@@ -787,22 +725,22 @@
                     <div class="row">
                         <div class="col-6 col-sm-12 col-lg-6">
                             <a href="category.html" class="cat-block" style="pointer-events: none;">
-                                <img src="user-end/images/social-banner.webp" alt="Category image">   
+                                <img src="user-end/images/social-banner.webp" alt="Category image">
                             </a>
                         </div><!-- End .col-sm-4 col-lg-2 -->
                          <div class="col-6 col-sm-12 col-lg-6">
                             <a href="category.html" class="cat-block" style="pointer-events: none;">
-                                <img src="user-end/images/social-banner2.webp" alt="Category image">   
+                                <img src="user-end/images/social-banner2.webp" alt="Category image">
                             </a>
                         </div><!-- End .col-sm-4 col-lg-2 -->
                          <div class="col-6 col-sm-12 col-lg-6">
                             <a href="category.html" class="cat-block" style="pointer-events: none;">
-                                <img src="user-end/images/social-banner3.webp" alt="Category image">   
+                                <img src="user-end/images/social-banner3.webp" alt="Category image">
                             </a>
                         </div><!-- End .col-sm-4 col-lg-2 -->
                         <div class="col-6 col-sm-12 col-lg-6">
                             <a href="category.html" class="cat-block" style="pointer-events: none;">
-                                <img src="user-end/images/social-banner4.webp" alt="Category image">   
+                                <img src="user-end/images/social-banner4.webp" alt="Category image">
                             </a>
                         </div><!-- End .col-sm-4 col-lg-2 -->
                     </div>
@@ -812,12 +750,12 @@
             <div class="mb-5"></div><!-- End .mb-5 -->
             <div class="container">
                 <h2 class="title mb-4">Laser Application</h2><!-- End .title text-center -->
-                <p style="font-size: 18px;">Popular materials and industries where laser systems shine. Explore all types of engraving and cutting work. Check more Customer Gallery Here 
+                <p style="font-size: 18px;">Popular materials and industries where laser systems shine. Explore all types of engraving and cutting work. Check more Customer Gallery Here
                 </p>
                 <div class="cat-blocks-container">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-lg-12">
-                            <img src="user-end/images/div-img.webp" class="mt-4" alt="Category image">       
+                            <img src="user-end/images/div-img.webp" class="mt-4" alt="Category image">
                         </div><!-- End .col-sm-4 col-lg-2 -->
                     </div><!-- End .row -->
                 </div><!-- End .cat-blocks-container -->
@@ -833,7 +771,7 @@
                           <div class="card-body">
                             <h5 class="card-title mt-2">SarbarMultimedia</h5>
                             <p class="card-text mt-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>
-                           
+
                           </div>
                          </div>
                         </div>
@@ -843,7 +781,7 @@
                           <div class="card-body">
                             <h5 class="card-title mt-2">Tim Meschke</h5>
                             <p class="card-text mt-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>
-                           
+
                           </div>
                           </div>
                         </div>
@@ -853,7 +791,7 @@
                           <div class="card-body">
                             <h5 class="card-title mt-2">MWLASER</h5>
                             <p class="card-text mt-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>
-                           
+
                           </div>
                          </div>
                         </div>
