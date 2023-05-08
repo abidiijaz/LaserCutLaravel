@@ -42,12 +42,15 @@ Route::namespace('App\Http\Controllers\User')->group(function(){
     Route::get('/detail-product/{id}','ProductDetailController@index' );
     Route::post('/AddToCart', 'CartController@index');
     Route::get('/view-cart', 'CartController@ViewCart');
+    Route::group(['middleware' => ['auth']],function(){
+        Route::get('/checkout','CheckoutController@index');
+    });
 });
 
 Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/checkout',function(){ return view('checkout'); });
+
 Route::get('/registeration','UserController@registeration');
 
 

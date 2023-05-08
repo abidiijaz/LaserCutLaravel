@@ -1,5 +1,6 @@
 @extends('layouts.user.mainapp')
 @section('content')
+<?php $total = 0; ?>
 <main class="main">
     <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         <div class="container">
@@ -34,7 +35,7 @@
                             </thead>
 
                             <tbody>
-                                <?php $total = 0; ?>
+                                
                                 @foreach (session('cart') as $id=>$details)
                                 <?php $total += $details['price']*$details['quantity']; ?>
                                 <tr>
@@ -61,13 +62,13 @@
                                     <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
                                 </tr>
                                @endforeach
-                               
+
                             </tbody>
                         </table><!-- End .table table-wishlist -->
                         @else
                         <h3 class="text-center">Cart is Empty!</h3>
                         @endif
-                       
+
                     </div><!-- End .col-lg-9 -->
                     <aside class="col-lg-3">
                         <div class="summary summary-cart">
@@ -129,7 +130,7 @@
                             <a href="checkout.html" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
                         </div><!-- End .summary -->
 
-                        <a href="category.html" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+                        <a href="{{ url('/') }}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
                     </aside><!-- End .col-lg-3 -->
                 </div><!-- End .row -->
             </div><!-- End .container -->

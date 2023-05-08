@@ -21,6 +21,7 @@ class CartController extends Controller
         if(!$cart){
             $cart = [
                 $id =>[
+                    "id" => $id,
                     "name" => $product->title,
                     "quantity" => 1,
                     "image" => $image[0],
@@ -36,6 +37,7 @@ class CartController extends Controller
             return response()->json(['cart' => $cart]);
         }
         $cart[$id] = [
+            "id" => $id,
             "name" => $product->title,
             "quantity" => 1,
             "image" => $image[0],
@@ -45,6 +47,7 @@ class CartController extends Controller
         return response()->json(['cart' => $cart]);
     }
     public function ViewCart(){
+        
         return view('cart');
     }
 }
