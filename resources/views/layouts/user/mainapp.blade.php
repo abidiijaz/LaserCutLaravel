@@ -233,5 +233,81 @@
         });
     });
 </script>
+    <script type="text/javascript">
+       
+        function ab_quantity__plus(id,price){
+            // alert(id);
+            var value = $('#input-'+id).val();
+            value++;
+            if(value > 0){
+                $('#input-'+id).val(value);
+                $('.ab_total-col_'+id).empty();
+                $('.ab_total-col_'+id).append("$"+(price*value).toFixed(2));
+                $.ajax({
+                url: '{{ url('update-cart') }}',
+                method: "patch",
+                data: {_token: '{{ csrf_token() }}', id: id, quantity: value},
+                success: function (data) {
+                //    window.location.reload();
+                var total = 0;
+                $('.dropdown-cart-products').empty();
+                $('.cart-count').empty();
+                $('.cart-total-price').empty();
+                $('.cart-count').append(Object.keys(data.cart).length);
+                for(var i = 0; i < Object.keys(data.cart).length; i++){
+                    total += data.cart[Object.keys(data.cart)[i]]['quantity']*data.cart[Object.keys(data.cart)[i]]['price'];
+                    $('.dropdown-cart-products').append("<div class='product'><div class='product-cart-details'><h4 class='product-title'><a href='/detail-product/"+Object.keys(data.cart)[i]+"'>"+data.cart[Object.keys(data.cart)[i]]['name']+"</a></h4><span class='cart-product-info'> <span class='cart-product-qty'>"+data.cart[Object.keys(data.cart)[i]]['quantity']+"</span> x $"+data.cart[Object.keys(data.cart)[i]]['price']+"</span></div><figure class='product-image-container'><a href='product.html' class='product-image'><img src='"+public_path+"/"+data.cart[Object.keys(data.cart)[i]]['image']+"' alt='product'></a></figure><a href='#' class='btn-remove' title='Remove Product'><i class='icon-close'></i></a></div>");
+                }
+                $('.cart-total-price').append("$"+total);
+                $('#ab_sub_total').empty();
+                $('#ab_sub_total').append("$"+total);
+               }
+            });
+            }
+        }
+        function ab_quantity__minus(id,price){
+            var value = $('#input-'+id).val();
+            value--;
+            if(value > 0){
+                $('#input-'+id).val(value);
+                $('.ab_total-col_'+id).empty();
+                $('.ab_total-col_'+id).append("$"+(price*value).toFixed(2));
+                $.ajax({
+               url: '{{ url('update-cart') }}',
+               method: "patch",
+               data: {_token: '{{ csrf_token() }}', id: id, quantity: value},
+               success: function (data) {
+                var total = 0;
+                $('.dropdown-cart-products').empty();
+                $('.cart-count').empty();
+                $('.cart-total-price').empty();
+                $('.cart-count').append(Object.keys(data.cart).length);
+                for(var i = 0; i < Object.keys(data.cart).length; i++){
+                    total += data.cart[Object.keys(data.cart)[i]]['quantity']*data.cart[Object.keys(data.cart)[i]]['price'];
+                    $('.dropdown-cart-products').append("<div class='product'><div class='product-cart-details'><h4 class='product-title'><a href='/detail-product/"+Object.keys(data.cart)[i]+"'>"+data.cart[Object.keys(data.cart)[i]]['name']+"</a></h4><span class='cart-product-info'> <span class='cart-product-qty'>"+data.cart[Object.keys(data.cart)[i]]['quantity']+"</span> x $"+data.cart[Object.keys(data.cart)[i]]['price']+"</span></div><figure class='product-image-container'><a href='product.html' class='product-image'><img src='"+public_path+"/"+data.cart[Object.keys(data.cart)[i]]['image']+"' alt='product'></a></figure><a href='#' class='btn-remove' title='Remove Product'><i class='icon-close'></i></a></div>");
+                }
+                $('.cart-total-price').append("$"+total);
+               }
+            });
+            }
+            
+            
+        }
+        $(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+            var ele = $(this);
+            if(confirm("Are you sure")) {
+                $.ajax({
+                    url: '{{ url('remove-from-cart') }}',
+                    method: "DELETE",
+                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
+                    success: function (response) {
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>

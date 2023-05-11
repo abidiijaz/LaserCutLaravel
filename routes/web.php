@@ -42,8 +42,16 @@ Route::namespace('App\Http\Controllers\User')->group(function(){
     Route::get('/detail-product/{id}','ProductDetailController@index' );
     Route::post('/AddToCart', 'CartController@index');
     Route::get('/view-cart', 'CartController@ViewCart');
+    Route::patch('/update-cart','CartController@update');
+    Route::delete('/remove-from-cart','CartController@remove');
     Route::group(['middleware' => ['auth']],function(){
         Route::get('/checkout','CheckoutController@index');
+        Route::post('/place-order','CheckoutController@PlaceOrder');
+        Route::get('/thankyou',function(){
+            return view('thanyou');
+        });
+        Route::get('/profile','ProfileController@index');
+
     });
 });
 
@@ -52,5 +60,6 @@ Route::get('/contact', function () { return view('contact'); });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/registeration','UserController@registeration');
+
 
 

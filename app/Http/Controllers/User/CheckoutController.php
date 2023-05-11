@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
+use Auth;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
+
 class CheckoutController extends Controller
 {
     public function __construct()
@@ -50,6 +54,35 @@ class CheckoutController extends Controller
             }
 
         }
-        return view('checkout');
+        $products = cart::where('user_id', Auth::user()->id)->with('products')->get();
+        // dd($products);
+        return view('checkout',compact('products'));
+    }
+    public function PlaceOrder(Request $request){
+        $order = new Order();
+        $order->user_id = Auth::user()->id;
+        $order->l_name = $request->l_name;
+        $order->c_name = $request->c_name;
+        $order->country = $request->country;
+        $order->s_address = $request->address;
+        $order->city = $request->city;
+        $order->state = $request->state;
+        $order->postcode = $request->postcode;
+        $order->phone = $request->phone;
+        $order->order_note = $request->order_note;
+        $order->order_status = 0;
+        $order->payment_method = $request->payment_method;
+        $order->grand_total = $request->grand_total;
+        $order->save();
+
+        $carts = Cart::where('user_id', Auth::user()->id)->get();
+        foreach($carts as $key => $value){
+            $orderItem = new OrderItem();
+            $orderItem->order_id = $order->id;
+            $orderItem->product_id = $value->product_id;
+            $orderItem->quantity = $value->quantity;
+            $orderItem->save();
+        }
+        return redirect('/thankyou');
     }
 }

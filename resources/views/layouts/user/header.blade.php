@@ -93,6 +93,9 @@
 
                             <div class="dropdown-menu dropdown-menu-right" style="width:135px; font-size:1.3rem; padding:0px;">
                                 <ul class="compare-products">
+                                    <li class="compare-product"> 
+                                        <a class="dropdown-item" href="/profile"> Profile </a>
+                                    </li>
                                     <li class="compare-product">
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -146,7 +149,7 @@
                                                         <img src="{{ asset('ab_admin/product/'.$details['image']) }}" alt="product">
                                                     </a>
                                                 </figure>
-                                                <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                                <button class="btn-remove remove-from-cart" data-id="{{ $id }}"><i class="icon-close"></i></button>
                                             </div><!-- End .product -->
                                         @endforeach
                                     @endif

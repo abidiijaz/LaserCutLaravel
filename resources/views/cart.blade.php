@@ -54,12 +54,14 @@
                                     </td>
                                     <td class="price-col">${{ $details['price'] }}</td>
                                     <td class="quantity-col">
-                                        <div class="cart-product-quantity">
-                                            <input type="number" class="form-control" value="{{ $details['quantity'] }}" min="1" max="10" step="1" data-decimals="0" required>
-                                        </div><!-- End .cart-product-quantity -->
+                                        <div class="ab_quantity">
+                                            <a href="javascript:void(0);" onclick="ab_quantity__minus({{ $id }},{{ $details['price'] }})" class="ab_quantity__minus"><span>-</span></a>
+                                            <input name="quantity" min="1" type="text" value="{{ $details['quantity'] }}" id="input-{{ $id }}" class="ab_quantity__input" value="1">
+                                            <a href="javascript:void(0)" onclick="ab_quantity__plus({{ $id }},{{ $details['price'] }})" class="ab_quantity__plus"><span>+</span></a>
+                                          </div>
                                     </td>
-                                    <td class="total-col">${{ $details['price']*$details['quantity'] }}.00</td>
-                                    <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
+                                    <td class="total-col ab_total-col_{{ $id }}">${{ $details['price']*$details['quantity'] }}.00</td>
+                                    <td class="remove-col"><button class="btn-remove remove-from-cart" data-id="{{ $id }}"><i class="icon-close"></i></button></td>
                                 </tr>
                                @endforeach
 
@@ -78,7 +80,7 @@
                                 <tbody>
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>${{ $total }}.00</td>
+                                        <td id="ab_sub_total">${{ $total }}.00</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr class="summary-shipping">
                                         <td>Shipping:</td>
@@ -99,7 +101,7 @@
                                         <td>
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" id="standart-shipping" name="shipping" class="custom-control-input">
-                                                <label class="custom-control-label" for="standart-shipping">Standart:</label>
+                                                <label class="custom-control-label" for="standart-shipping">Standard:</label>
                                             </div><!-- End .custom-control -->
                                         </td>
                                         <td>$10.00</td>
@@ -115,10 +117,7 @@
                                         <td>$20.00</td>
                                     </tr><!-- End .summary-shipping-row -->
 
-                                    <tr class="summary-shipping-estimate">
-                                        <td>Estimate for Your Country<br> <a href="dashboard.html">Change address</a></td>
-                                        <td>&nbsp;</td>
-                                    </tr><!-- End .summary-shipping-estimate -->
+                                  
 
                                     <tr class="summary-total">
                                         <td>Total:</td>
@@ -127,7 +126,7 @@
                                 </tbody>
                             </table><!-- End .table table-summary -->
 
-                            <a href="checkout.html" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
+                            <a href="/checkout" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
                         </div><!-- End .summary -->
 
                         <a href="{{ url('/') }}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
