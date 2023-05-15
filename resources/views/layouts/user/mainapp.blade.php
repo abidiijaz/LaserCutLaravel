@@ -225,6 +225,9 @@
     <script src="{{asset('user-end/assets/js/main.js')}}"></script>
     <script src="{{asset('user-end/assets/js/demos/demo-4.js')}}"></script>
     <script src="{{asset('user-end/assets/js/custom-js.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
 <script type="text/javascript">
     $("document").ready(function(){
         $(".menu li").hover(function() {

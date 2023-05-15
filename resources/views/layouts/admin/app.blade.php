@@ -138,7 +138,7 @@
     </div>
 
     <div class="user_div">
-        <h5 class="brand-name mb-4">Machine sale Admin<a href="javascript:void(0)" class="user_btn"><i class="fa fa-times" aria-hidden="true"></i></a></h5>
+        <h5 class="brand-name mb-4">Admin<a href="javascript:void(0)" class="user_btn"><i class="fa fa-times" aria-hidden="true"></i></a></h5>
         <div class="card-body">
             <a href="page-profile.html"><img class="card-profile-img" src="" alt=""></a>
             <h6 class="mb-0 text-capitalize">{{Auth::guard('admin')->user()->name}}</h6>
@@ -162,6 +162,7 @@
 
                     </ul>
                 </li>
+                <li class="{{(request()->path()=="admin/dashboard") || (request()->path()=="admin/") || (request()->path()=="admin/orders")?"active":null}}"><a href="/admin/orders"><i class="fa fa-lock"></i><span>Orders</span></a></li>
                 
             </ul>
         </nav>
@@ -246,6 +247,7 @@
 <script src="{{asset('assets/js/page/project-index.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
 </body>
 
 <!-- soccer/project/  07 Jan 2020 03:37:22 GMT -->

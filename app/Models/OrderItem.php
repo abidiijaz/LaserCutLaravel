@@ -9,4 +9,7 @@ class OrderItem extends Model
 {
     use HasFactory;
     protected $table = "order_items";
+    public function product(){
+        return $this->belongsTo('App\Models\Product','product_id','id');
+    }
 }

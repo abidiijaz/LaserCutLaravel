@@ -14,45 +14,34 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Projects</h3>
+                                <h3 class="card-title">Total Products</h3>
                             </div>
                             <div class="card-body">
                             <span class="float-left"><i class="fa fa-tasks " style="font-size: 40px;color:#EB6F62" aria-hidden="true"></i></span>
-                                <h5 class="number mb-0 font-32 counter float-right"></h5>
+                                <h5 class="number mb-0 font-32 counter float-right">{{ $product_count }}</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Complete Projects</h3>
+                                <h3 class="card-title">Orders</h3>
                             </div>
                             <div class="card-body">
-                            <span class="float-left"><i class="fa fa-check-square" style="font-size: 40px;color:#4caf50" aria-hidden="true"></i></span>
-                                <h5 class="number mb-0 font-32 counter float-right"></h5>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- <div class="col-xl-2 col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Managers</h3>
-                            </div>
-                            <div class="card-body">
-                            <span class="float-left"><i class="fa fa-user-circle" style="font-size: 40px;color:#2196f3" aria-hidden="true"></i></span>
-                                <h5 class="number mb-0 font-32 counter float-right"></h5>
+                                <span class="float-left"><i class="fa fa-file" style="font-size: 40px;color:#00bcd4" aria-hidden="true"></i></span>
+                                <h5 class="number mb-0 font-32 counter float-right">{{ $order_count }}</h5>
 
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Task Pending</h3>
+                                <h3 class="card-title">Pendding Orders</h3>
                             </div>
                             <div class="card-body">
                             <span class="float-left"><i class="fa fa-file" style="font-size: 40px;color:#ff9800bf" aria-hidden="true"></i></span>
-                                <h5 class="number mb-0 font-32 counter float-right"></h5>
+                                <h5 class="number mb-0 font-32 counter float-right">{{ $pedding_order_count }}</h5>
 
                             </div>
                         </div>
@@ -60,15 +49,15 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Team Members</h3>
+                                <h3 class="card-title">Completed Orders</h3>
                             </div>
                             <div class="card-body">
-                                <span class="float-left"><i class="fa fa-user" style="font-size: 40px;color:#00bcd4" aria-hidden="true"></i></span>
-                                <h5 class="number mb-0 font-32 counter float-right"></h5>
-
+                            <span class="float-left"><i class="fa fa-check-square" style="font-size: 40px;color:#4caf50" aria-hidden="true"></i></span>
+                                <h5 class="number mb-0 font-32 counter float-right">{{ $complete_order_count }}</h5>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row clearfix row-deck">
                     <div class="col-xl-12 col-lg-12">
@@ -98,97 +87,22 @@
                                     <table class="table table-hover table-striped text-nowrap table-vcenter mb-0">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
+                                                <th>Order ID</th>
                                                 <th>Client Name</th>
-                                                <th>Team</th>
-                                                <th>Project</th>
-                                                <th>Project Cost</th>
-                                                <th>Payment</th>
+                                                <th>Oder Date</th>
+                                                <th>Total</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>#AD1245</td>
-                                                <td>Sean Black</td>
-                                                <td>
-                                                    <ul class="list-unstyled team-info sm margin-0 w150">
-                                                        <li><img src="assets/images/xs/avatar1.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar2.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar3.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar4.jpg" alt="Avatar"></li>
-                                                        <li class="ml-2"><span>2+</span></li>
-                                                    </ul>
-                                                </td>
-                                                <td>Angular Admin</td>
-                                                <td>$14,500</td>
-                                                <td>Done</td>
-                                                <td><span class="tag tag-success">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#DF1937</td>
-                                                <td>Sean Black</td>
-                                                <td>
-                                                    <ul class="list-unstyled team-info sm margin-0 w150">
-                                                        <li><img src="assets/images/xs/avatar1.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar2.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar3.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar4.jpg" alt="Avatar"></li>
-                                                        <li class="ml-2"><span>2+</span></li>
-                                                    </ul>
-                                                </td>
-                                                <td>Angular Admin</td>
-                                                <td>$14,500</td>
-                                                <td>Pending</td>
-                                                <td><span class="tag tag-success">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#YU8585</td>
-                                                <td>Merri Diamond</td>
-                                                <td>
-                                                    <ul class="list-unstyled team-info sm margin-0 w150">
-                                                        <li><img src="assets/images/xs/avatar1.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar2.jpg" alt="Avatar"></li>
-                                                    </ul>
-                                                </td>
-                                                <td>One page html Admin</td>
-                                                <td>$500</td>
-                                                <td>Done</td>
-                                                <td><span class="tag tag-orange">Submit</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#AD1245</td>
-                                                <td>Sean Black</td>
-                                                <td>
-                                                    <ul class="list-unstyled team-info sm margin-0 w150">
-                                                        <li><img src="assets/images/xs/avatar1.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar2.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar3.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar4.jpg" alt="Avatar"></li>
-                                                    </ul>
-                                                </td>
-                                                <td>Wordpress One page</td>
-                                                <td>$1,500</td>
-                                                <td>Done</td>
-                                                <td><span class="tag tag-success">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#GH8596</td>
-                                                <td>Allen Collins</td>
-                                                <td>
-                                                    <ul class="list-unstyled team-info sm margin-0 w150">
-                                                        <li><img src="assets/images/xs/avatar1.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar2.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar3.jpg" alt="Avatar"></li>
-                                                        <li><img src="assets/images/xs/avatar4.jpg" alt="Avatar"></li>
-                                                        <li class="ml-2"><span>2+</span></li>
-                                                    </ul>
-                                                </td>
-                                                <td>VueJs Application</td>
-                                                <td>$9,500</td>
-                                                <td>Done</td>
-                                                <td><span class="tag tag-success">Delivered</span></td>
-                                            </tr>
+                                            @foreach ($orders as $order)
+                                                <tr>
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->user->name }}</td>
+                                                    <td> {{ $order->created_at->format('Y-m-d') }}</td>
+                                                    <td>${{ $order->grand_total }}</td>
+                                                    <td><span class="tag tag-success">{{ $order->order_status }}</span></td>                                               </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -260,6 +174,6 @@
                 </div>
             </div>
         </div>
-
+        
 
 @endsection

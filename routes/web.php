@@ -34,6 +34,14 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::post('/update-category','ProductCategoryController@UpdateCategory');
          Route::post('/delete-category','ProductCategoryController@DeleteCategory');
          // End Product Here
+
+         // For Orders
+         Route::get('/orders','OrderController@index');
+        //  Route::post('/add-product','ProductController@AddProduct');
+         Route::post('/edit-order','OrderController@EditOrder');
+         Route::post('/update-order','OrderController@UpdateOrder');
+         Route::post('/delete-category','ProductCategoryController@DeleteCategory');
+         // End Orders Here
     });
 });
 // For User Routing
@@ -47,17 +55,17 @@ Route::namespace('App\Http\Controllers\User')->group(function(){
     Route::group(['middleware' => ['auth']],function(){
         Route::get('/checkout','CheckoutController@index');
         Route::post('/place-order','CheckoutController@PlaceOrder');
-        Route::get('/thankyou',function(){
-            return view('thanyou');
-        });
+        Route::get('/thankyou',function(){ return view('thankyou'); });
         Route::get('/profile','ProfileController@index');
-
+        Route::post('/user-view-order', 'CheckoutController@UserOrderView');
     });
+
 });
 
 Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/store/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/registeration','UserController@registeration');
 

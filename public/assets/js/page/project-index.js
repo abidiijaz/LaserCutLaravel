@@ -13,6 +13,7 @@ $(function() {
 
     // Current Ticket Status
     $(document).ready(function(){
+        
         var chart = c3.generate({
             bindto: '#chart-combination', // id of chart wrapper
             data: {

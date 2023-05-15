@@ -74,15 +74,32 @@ class CheckoutController extends Controller
         $order->payment_method = $request->payment_method;
         $order->grand_total = $request->grand_total;
         $order->save();
-
+        $cart = session()->get('cart');
         $carts = Cart::where('user_id', Auth::user()->id)->get();
+        $count = 0;
         foreach($carts as $key => $value){
+            $count++;
             $orderItem = new OrderItem();
             $orderItem->order_id = $order->id;
             $orderItem->product_id = $value->product_id;
             $orderItem->quantity = $value->quantity;
             $orderItem->save();
         }
-        return redirect('/thankyou');
+        if(sizeof($cart) == sizeof($carts)){
+        session()->forget('cart');
+            foreach($carts as $value){
+                $ab_cart = Cart::where('id',$value->id)->first();
+                $ab_cart->delete();
+            }
+        }
+        $orderitems = OrderItem::where('order_id',$order->id)->with('product')->get();
+// dd($order);
+
+        return view('thankyou',compact('order','orderitems'));
+    }
+    public function UserOrderView(Request $request){
+        $order = Order::where('id',$request->id)->first();
+        $orderitems = OrderItem::where('order_id',$order->id)->with('product')->get();
+        return view('userorderview',compact('order','orderitems'));
     }
 }

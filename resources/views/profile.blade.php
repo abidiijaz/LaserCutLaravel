@@ -34,9 +34,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Sign Out</a>
-                            </li>
                         </ul>
                     </aside><!-- End .col-lg-3 -->
 
@@ -49,6 +46,7 @@
                             </div><!-- .End .tab-pane -->
 
                             <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+                                @if(count($orders) >0)
                                 <table class="table table-cart table-mobile">
                                     <thead>
                                         <tr>
@@ -60,7 +58,6 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-        
                                     <tbody>
                                         @foreach ($orders as $order)
                                         <tr>
@@ -72,18 +69,27 @@
                                             <td>${{ sprintf("%.2f",$order->grand_total) }}</td>
                                             <td>
                                                 @if($order->order_status == 0 )
-                                                <button class="btn btn-warning">Pendding</button>
+                                                <button class="btn btn-warning" disabled>Order Accepted</button>
                                                 @elseif($order->order_status == 1)
-                                                <button class="btn btn-primary">In Processing</button>
+                                                <button class="btn btn-primary" disabled>In Processing</button>
                                                 @elseif($order->order_status == 2)
-                                                <button class="btn btn-success">Delivered</button>
+                                                <button class="btn btn-success" disabled>Delivered</button>
                                                 @endif
                                             </td>
-                                            <td><button class="btn btn-info">View</button></td>
+                                            <td>
+                                                <form action="/user-view-order" method="post" class="d-inline">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $order->id }}">
+                                                    <button class="btn btn-info btn-sm">View</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                @else
+                                <h3>Not Order Place Yet</h3>
+                                @endif
                                 <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
                             </div><!-- .End .tab-pane -->
 
@@ -94,13 +100,15 @@
                                     <div class="col-lg-6">
                                         <div class="card card-dashboard">
                                             <div class="card-body">
-                                                <h3 class="card-title">User Info</h3><!-- End .card-title -->
+                                                <h3 class="card-title">User Info</h3>   
 
                                                 <p>{{ Auth::user()->name }}<br>
-                                                    {{ $orders[0]->c_name }}<br>
-                                                    {{ $orders[0]->s_address }}<br>
-                                                    {{ $orders[0]->city }}, {{ $orders[0]->postcode }}<br>
-                                                    {{ $orders[0]->phone }}<br>
+                                                    @if(count($orders) >0)
+                                                        {{ $orders[0]->c_name }}<br>
+                                                        {{ $orders[0]->s_address }}<br>
+                                                        {{ $orders[0]->city }}, {{ $orders[0]->postcode }}<br>
+                                                        {{ $orders[0]->phone }}<br>
+                                                    @endif
                                                     {{ Auth::user()->email }}<br>
                                                 <a href="#">Edit <i class="icon-edit"></i></a></p>
                                             </div><!-- End .card-body -->
@@ -119,7 +127,7 @@
 
                                         <div class="col-sm-6">
                                             <label>Last Name *</label>
-                                            <input type="text" name="l_name" value="{{ $orders[0]->l_name }}" class="form-control" required>
+                                            {{-- <input type="text" name="l_name" value="{{($orders != ''?$orders[0]->l_name:'')}}" class="form-control" required> --}}
                                         </div><!-- End .col-sm-6 -->
                                     </div><!-- End .row -->
 
