@@ -13,7 +13,7 @@
         <div class="col-lg-12 col-xl-8 pt-2 pb-2">
             {{-- <a href="javascript:void(0)" onclick="getPDF()" class="btn btn-success float-right">Download PDF</a> --}}
         </div>
-        
+
         <div class="col-lg-12 col-xl-8 canvas_div_pdf">
           <div class="card" style="border: 0.1rem solid #ebebeb;">
             <div class="card-header px-4 py-3">
@@ -27,7 +27,7 @@
                     <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
                     <p class="small text-muted mb-0">Receipt Voucher : {{ $order->id }}</p>
                 </div>
-                
+
                 <div class="d-flex justify-content-between pt-2">
                     <p class="fw-bold mb-0"><b>User Info</b></</p>
                     <p class="text-muted mb-0"><span class="fw-bold me-4"><b>Shipping Address</b></span> </p>
@@ -41,7 +41,7 @@
                     <p class="text-muted mb-0">Email : 22 Dec,2019</p>
                     <p class="text-muted mb-0">{{ $order->state }},{{ $order->country }}</p>
                 </div>
-                
+
 
                 <div class="d-flex justify-content-between mb-5">
                     <p class="text-muted mb-0">Phone No : {{ $order->phone }}</p>
@@ -69,8 +69,8 @@
                                     <p class="text-muted mb-0 small">Qty: {{ $item->quantity }}</p>
                                 </div>
                                 <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                    <?php 
-                                        $price = ($item->quantity*$item->product->price); 
+                                    <?php
+                                        $price = ($item->quantity*$item->product->price);
                                         $total += $price;
                                     ?>
                                     <p class="text-muted mb-0 small">${{ sprintf("%.2f",$item->product->price) }}</p>
@@ -95,7 +95,7 @@
                     <p class="text-muted mb-0">Payment Method : {{ $order->payment_method }}</p>
                     <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
                 </div>
-                <div class="card-footer border-0 px-4 py-3 text-white" style="background-color: #5a7c20;"> 
+                <div class="card-footer border-0 px-4 py-3 text-white" style="background-color: #5a7c20;">
                     <h5 class="d-flex align-items-center justify-content-end text-uppercase mb-0">Total
                         paid: <span class="h2 mb-0 ms-2">${{ sprintf("%.2f",$order->grand_total) }}</span></h5>
                 </div>
@@ -137,20 +137,20 @@
 
         html2canvas($(".canvas_div_pdf")[0],{allowTaint:true}).then(function(canvas) {
             canvas.getContext('2d');
-            
+
             console.log(canvas.height+"  "+canvas.width);
-            
-            
+
+
             var imgData = canvas.toDataURL("image/jpeg", 1.0);
             var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
             pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
-            
-            
-            for (var i = 1; i <= totalPDFPages; i++) { 
+
+
+            for (var i = 1; i <= totalPDFPages; i++) {
                 pdf.addPage(PDF_Width, PDF_Height);
                 pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
             }
-            
+
             pdf.save("HTML-Document.pdf");
         });
     };

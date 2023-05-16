@@ -63,15 +63,7 @@
                                                     <td class="text-capitalize">{{ $order->created_at }}</td>
                                                     <td class="text-capitalize">{{ $order->phone }}</td>
                                                     <td class="text-capitalize">{{ $order->s_address }}</td>
-                                                    <td>
-                                                        @if($order->order_status == 0 )
-                                                        <button class="btn btn-warning text-white">Pendding</button>
-                                                        @elseif($order->order_status == 1)
-                                                        <button class="btn btn-primary text-white">In Processing</button>
-                                                        @elseif($order->order_status == 2)
-                                                        <button class="btn btn-success text-white">Delivered</button>
-                                                        @endif
-                                                    </td>
+                                                    <td>@include("components.admin.order_status")</td>
                                                     <td class="d-flex">
                                                         <form action="/admin/edit-order" method="post" class="d-inline">
                                                             @csrf
@@ -106,7 +98,7 @@
                     </div>
                 </div>
             </div>
-                  
+
                 </div>
             </div>
         </div>

@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="row clearfix row-deck">
                     <div class="col-xl-12 col-lg-12">
@@ -101,7 +101,7 @@
                                                     <td>{{ $order->user->name }}</td>
                                                     <td> {{ $order->created_at->format('Y-m-d') }}</td>
                                                     <td>${{ $order->grand_total }}</td>
-                                                    <td><span class="tag tag-success">{{ $order->order_status }}</span></td>                                               </tr>
+                                                    <td>@include('components.admin.order_status')</td>                                               </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -174,6 +174,6 @@
                 </div>
             </div>
         </div>
-        
+
 
 @endsection

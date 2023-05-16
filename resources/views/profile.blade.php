@@ -67,15 +67,7 @@
                                             <td>{{ $order->user->name }}</td>
                                             <td>{{ $order->payment_method }}</td>
                                             <td>${{ sprintf("%.2f",$order->grand_total) }}</td>
-                                            <td>
-                                                @if($order->order_status == 0 )
-                                                <button class="btn btn-warning" disabled>Order Accepted</button>
-                                                @elseif($order->order_status == 1)
-                                                <button class="btn btn-primary" disabled>In Processing</button>
-                                                @elseif($order->order_status == 2)
-                                                <button class="btn btn-success" disabled>Delivered</button>
-                                                @endif
-                                            </td>
+                                            <td>@include("components.admin.order_status")</td>
                                             <td>
                                                 <form action="/user-view-order" method="post" class="d-inline">
                                                     @csrf
@@ -100,7 +92,7 @@
                                     <div class="col-lg-6">
                                         <div class="card card-dashboard">
                                             <div class="card-body">
-                                                <h3 class="card-title">User Info</h3>   
+                                                <h3 class="card-title">User Info</h3>
 
                                                 <p>{{ Auth::user()->name }}<br>
                                                     @if(count($orders) >0)

@@ -7,7 +7,7 @@
         <div class="col-lg-10 col-xl-8 pt-2 pb-2">
             <a href="javascript:void(0)" onclick="getPDF()" class="btn btn-success float-right">download PDF</a>
         </div>
-        
+
         <div class="col-lg-10 col-xl-8 canvas_div_pdf">
           <div class="card" style="border-radius: 10px;border: 0.1rem solid #ebebeb;">
             <div class="card-header px-4 py-5">
@@ -20,15 +20,7 @@
               </div>
               <div class="d-flex justify-content-between pb-2">
                 <p class="fw-bold mb-0"><b>Order Status</b></</p>
-                <p class="text-muted mb-0">
-                    @if($order->order_status == 0 )
-                    <button class="btn btn-warning" disabled>Order Accepted</button>
-                    @elseif($order->order_status == 1)
-                    <button class="btn btn-primary" disabled>In Processing</button>
-                    @elseif($order->order_status == 2)
-                    <button class="btn btn-success" disabled>Delivered</button>
-                    @endif
-                </p>
+                <p class="text-muted mb-0">@include("components.admin.order_status")</p>
               </div>
                     <?php $total=0; ?>
                     @foreach ($orderitems as $item)
@@ -52,8 +44,8 @@
                                 <p class="text-muted mb-0 small">Qty: {{ $item->quantity }}</p>
                             </div>
                             <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                <?php 
-                                    $price = ($item->quantity*$item->product->price); 
+                                <?php
+                                    $price = ($item->quantity*$item->product->price);
                                     $total += $price;
                                 ?>
                                 <p class="text-muted mb-0 small">${{ sprintf("%.2f",$item->product->price) }}</p>
@@ -71,7 +63,7 @@
 
               <div class="d-flex justify-content-between ">
                 <p class="text-muted mb-0">User Email : {{ Auth::user()->email }}</p>
-                
+
               </div>
               <div class="d-flex justify-content-between ">
                 <p class="text-muted mb-0">Address : {{ $order->s_address }},{{ $order->city }},<br/>{{ $order->state }},{{ $order->country }},{{ $order->postcode }}</p>
@@ -114,20 +106,20 @@
 
         html2canvas($(".canvas_div_pdf")[0],{allowTaint:true}).then(function(canvas) {
             canvas.getContext('2d');
-            
+
             console.log(canvas.height+"  "+canvas.width);
-            
-            
+
+
             var imgData = canvas.toDataURL("image/jpeg", 1.0);
             var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
             pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
-            
-            
-            for (var i = 1; i <= totalPDFPages; i++) { 
+
+
+            for (var i = 1; i <= totalPDFPages; i++) {
                 pdf.addPage(PDF_Width, PDF_Height);
                 pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
             }
-            
+
             pdf.save("HTML-Document.pdf");
         });
     };

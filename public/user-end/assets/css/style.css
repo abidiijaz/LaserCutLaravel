@@ -1645,7 +1645,7 @@ blockquote.text-white cite span {
 .menu li:hover > .megamenu,
 .menu li.show > ul,
 .menu li.show > .megamenu {
-    
+
     display: block;
 }
 .menu .megamenu-container {
@@ -16351,7 +16351,7 @@ button:focus {
   .ab_quantity__plus:hover {
     background: #575b71;
     color: #fff;
-  } 
+  }
   .ab_quantity__minus {
     border-radius: 3px 0 0 3px;
   }
@@ -16374,8 +16374,9 @@ button:focus {
   .ab_quantity__minus:link,
   .ab_quantity__plus:link {
     color: #8184a1;
-  } 
+  }
   .ab_quantity__minus:visited,
   .ab_quantity__plus:visited {
     color: #fff;
   }
+
